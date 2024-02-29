@@ -1,4 +1,6 @@
 package maven.connectSqlEclipse;
+//FONTE: https://github.com/icei-pucminas/ti2cc
+
 
 public class Usuario {
 	private int codigo;
