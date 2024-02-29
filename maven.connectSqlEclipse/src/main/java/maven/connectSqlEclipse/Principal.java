@@ -13,10 +13,10 @@ public class Principal {
 
         do {
             System.out.println("===== Menu =====");
-            System.out.println("1. Listar usuários");
-            System.out.println("2. Inserir usuário");
-            System.out.println("3. Excluir usuário");
-            System.out.println("4. Atualizar usuário");
+            System.out.println("1. Listar Passagens Aéreas");
+            System.out.println("2. Inserir Passagem Aérea");
+            System.out.println("3. Excluir Passagem Aérea");
+            System.out.println("4. Atualizar Passagem Aérea");
             System.out.println("5. Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -24,61 +24,61 @@ public class Principal {
 
             switch (escolha) {
                 case 1:
-                    // Listar usuários
-                    System.out.println("==== Mostrar usuários === ");
-                    Usuario[] usuarios = dao.getUsuarios();
-                    for (int i = 0; i < usuarios.length; i++) {
-                        System.out.println(usuarios[i].toString());
+                    // Listar passagens aéreas
+                    System.out.println("==== Mostrar passagens aéreas === ");
+                    PassagemAerea[] passagensAereas = dao.getPassagensAereas();
+                    for (int i = 0; i < passagensAereas.length; i++) {
+                        System.out.println(passagensAereas[i].toString());
                     }
                     break;
 
                 case 2:
-                    // Inserir usuário
-                    System.out.print("Digite o código do usuário: ");
-                    int codigo = scanner.nextInt();
-                    System.out.print("Digite o nome do usuário: ");
-                    String nome = scanner.next();
-                    System.out.print("Digite a senha do usuário: ");
-                    String senha = scanner.next();
-                    System.out.print("Digite o sexo do usuário (M/F): ");
-                    char sexo = scanner.next().charAt(0);
+                    // Inserir passagem aérea
+                    System.out.print("Digite o número do voo: ");
+                    int codigoVoo = scanner.nextInt();
+                    System.out.print("Digite a cidade de origem: ");
+                    String cidadeOrigem = scanner.next();
+                    System.out.print("Digite a cidade de destino: ");
+                    String cidadeDestino = scanner.next();
+                    System.out.print("Digite o nome do passageiro: ");
+                    String nomePassageiro = scanner.next();
 
-                    Usuario novoUsuario = new Usuario(codigo, nome, senha, sexo);
-                    if (dao.inserirUsuario(novoUsuario)) {
-                        System.out.println("Inserção com sucesso -> " + novoUsuario.toString());
+                    PassagemAerea novaPassagemAerea = new PassagemAerea(codigoVoo, nomePassageiro, cidadeOrigem, cidadeDestino);
+                    if (dao.inserirPassagemAerea(novaPassagemAerea)) {
+                        System.out.println("Inserção com sucesso -> " + novaPassagemAerea.toString());
                     } else {
-                        System.out.println("Falha ao inserir usuário.");
+                        System.out.println("Falha ao inserir passagem aérea.");
                     }
                     break;
 
                 case 3:
-                    // Excluir usuário
-                    System.out.print("Digite o código do usuário a ser excluído: ");
+                    // Excluir passagem aérea
+                    System.out.print("Digite o código da passagem aérea a ser excluída: ");
                     int codigoExcluir = scanner.nextInt();
-                    if (dao.excluirUsuario(codigoExcluir)) {
-                        System.out.println("Usuário excluído com sucesso.");
+                    if (dao.excluirPassagemAerea(codigoExcluir)) {
+                        System.out.println("Passagem aérea excluída com sucesso.");
                     } else {
-                        System.out.println("Falha ao excluir usuário. Verifique o código.");
+                        System.out.println("Falha ao excluir passagem aérea. Verifique o código.");
                     }
                     break;
 
                 case 4:
-                    // Atualizar usuário
-                    System.out.print("Digite o código do usuário a ser atualizado: ");
+                    // Atualizar passagem aérea
+                    System.out.print("Digite o código da passagem aérea a ser atualizada: ");
                     int codigoAtualizar = scanner.nextInt();
-                    Usuario usuarioAtualizar = dao.getUsuarioByCodigo(codigoAtualizar);
+                    PassagemAerea passagemAereaAtualizar = dao.getPassagemAereaByCodigo(codigoAtualizar);
 
-                    if (usuarioAtualizar != null) {
-                        System.out.print("Digite a nova senha do usuário: ");
-                        String novaSenha = scanner.next();
-                        usuarioAtualizar.setSenha(novaSenha);
-                        if (dao.atualizarUsuario(usuarioAtualizar)) {
-                            System.out.println("Usuário atualizado com sucesso.");
+                    if (passagemAereaAtualizar != null) {
+                        System.out.print("Digite a nova cidade de destino: ");
+                        String novaCidadeDestino = scanner.next();
+                        passagemAereaAtualizar.setCidadeDestino(novaCidadeDestino);
+                        if (dao.atualizarPassagemAerea(passagemAereaAtualizar)) {
+                            System.out.println("Passagem aérea atualizada com sucesso.");
                         } else {
-                            System.out.println("Falha ao atualizar usuário.");
+                            System.out.println("Falha ao atualizar passagem aérea.");
                         }
                     } else {
-                        System.out.println("Usuário não encontrado.");
+                        System.out.println("Passagem aérea não encontrada.");
                     }
                     break;
             }
